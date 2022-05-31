@@ -33,13 +33,14 @@
 }
 
 .tasks-list__input,
-.top-section__input {
+.top-section__input,
+.tasks-list__label {
   width: 56%;
   display: inline-block;
   flex-grow: 1;
 }
 
-.task-row-wrapper {
+.top-section__wrapper {
   display: flex;
 }
 
