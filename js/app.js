@@ -41,9 +41,9 @@ var createNewTaskElement = function (taskString) {
   editInput.className = 'tasks-list__input task';
 
   editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
-  editButton.className = 'tasks-list__btn_edit';
+  editButton.className = 'tasks-list__btn_edit button';
 
-  deleteButton.className = 'tasks-list__btn_delete';
+  deleteButton.className = 'tasks-list__btn_delete button';
   deleteButtonImg.src = 'assets/icons/remove.svg';
   deleteButtonImg.className = 'tasks-list__delete-icon ';
   deleteButton.appendChild(deleteButtonImg);
@@ -121,7 +121,7 @@ var taskCompleted = function () {
   var editBtn = listItem.querySelector('.tasks-list__btn_edit');
   var editInput = listItem.querySelector('.tasks-list__input');
   var containsClass = listItem.classList.contains('tasks-list__item_edit');
-  
+
   //If class of the parent is .tasks-list__item_edit
   if (containsClass) {
     //switch to .tasks-list__item_edit
@@ -132,7 +132,7 @@ var taskCompleted = function () {
     label.classList.toggle('tasks-list__label_edit');
     editInput.classList.toggle('tasks-list__input_edit');
   }
-  
+
   //Append the task list item to the #completed-tasks
   label.classList.toggle('tasks-list__label_complete');
   completedTasksHolder.appendChild(listItem);
@@ -145,7 +145,25 @@ var taskIncomplete = function () {
   //When the checkbox is unchecked
   //Append the task list item to the #incompleteTasks.
   var listItem = this.parentNode;
+
+  //Make the task which is being editted saved
+
   var label = listItem.querySelector('.tasks-list__label');
+  var editBtn = listItem.querySelector('.tasks-list__btn_edit');
+  var editInput = listItem.querySelector('.tasks-list__input');
+  var containsClass = listItem.classList.contains('tasks-list__item_edit');
+
+  //If class of the parent is .tasks-list__item_edit
+  if (containsClass) {
+    //switch to .tasks-list__item_edit
+    //label becomes the inputs value.
+    label.innerText = editInput.value;
+    editBtn.innerText = 'Edit';
+    listItem.classList.toggle('tasks-list__item_edit');
+    label.classList.toggle('tasks-list__label_edit');
+    editInput.classList.toggle('tasks-list__input_edit');
+  }
+
   incompleteTaskHolder.appendChild(listItem);
   label.classList.toggle('tasks-list__label_complete');
   bindTaskEvents(listItem, taskCompleted);
